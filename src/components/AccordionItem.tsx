@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { nextUuid } from '../helpers/uuid';
+import { nextUuid, assertValidHtmlId } from '../helpers/uuid';
 import { Provider as ItemProvider, UUID } from './ItemContext';
 
 type Props = DivAttributes & {
@@ -21,6 +21,8 @@ export default class AccordionItem extends React.Component<Props> {
 
     render(): JSX.Element {
         const { uuid = this.instanceUuid, ...rest } = this.props;
+
+        if (rest.id) assertValidHtmlId(rest.id);
 
         return (
             <ItemProvider uuid={uuid}>
